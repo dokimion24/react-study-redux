@@ -1,10 +1,25 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import { createStore } from "redux";
+import counter from "./reducers";
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
+
+const store = createStore(counter);
+
+const render = () =>
+  root.render(
+    <React.StrictMode>
+      <App
+        value={store.getState()}
+        onIncrement={() => store.dispatch({ type: "INCREMENT" })}
+        onDecrement={() => store.dispatch({ type: "DECREMENT" })}
+      />
+    </React.StrictMode>
+  );
+
+render();
+store.subscribe(render);

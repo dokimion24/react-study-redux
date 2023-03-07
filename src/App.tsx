@@ -1,14 +1,20 @@
 import { useState } from "react";
 import "./App.css";
 
-function App() {
+type Props = {
+  value: number;
+  onIncrement: () => void;
+  onDecrement: () => void;
+};
+
+function App({ value, onIncrement, onDecrement }: Props) {
   const [count, setCount] = useState(0);
 
   return (
     <div className="App">
-      Clicked: items
-      <button>+</button>
-      <button>-</button>
+      Clicked: {value} items
+      <button onClick={onIncrement}>+</button>
+      <button onClick={onDecrement}>-</button>
     </div>
   );
 }
